@@ -109,6 +109,10 @@ ul.sitemapTree {
     background-size: contain;
 }
 
+.sitemapFlowIcon {
+    background: url('images/flow.svg') no-repeat center center, linear-gradient(transparent,transparent);
+}
+
 .sitemapFolderOpenIcon {
     background: url('images/folder_open.png') no-repeat center center;
     background: url('images/folder_open.svg') no-repeat center center, linear-gradient(transparent,transparent);

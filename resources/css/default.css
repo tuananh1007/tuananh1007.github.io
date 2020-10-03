@@ -74,6 +74,7 @@ input[type=text]::-ms-clear {
     background-color: #d8d8d8;
     opacity: 0; 
     flex: 1;
+    overflow: hidden;
 }
 
 #clippingBounds {
@@ -682,6 +683,14 @@ div.axClearMsgBubble_Player {
     max-width: 175px;
     margin-left: 10px;
     margin-right: 6px;
+}
+
+.pageCountHeader {
+    float: left;
+    white-space: nowrap;
+    margin-left: 5px;
+    margin-right: 6px;
+    color: #aaaaaa;
 }
 
 #interfaceAdaptiveViewsContainer {

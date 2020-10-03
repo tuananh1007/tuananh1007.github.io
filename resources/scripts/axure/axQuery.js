@@ -41,9 +41,9 @@
 
     $(window).resize(function() {
         var THRESHOLD = 50;
+        _updateWindowInfo();
         var now = new Date().getTime();
         if(now - _lastFiredResize > THRESHOLD) {
-            _updateWindowInfo();
             _fireResize();
         } else if(!_lastTimeout) {
             _lastTimeout = window.setTimeout(_fireResize, THRESHOLD);

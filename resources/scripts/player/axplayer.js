@@ -1,7 +1,4 @@
-﻿var PAGE_ID_NAME = 'id';
-var PAGE_URL_NAME = 'p';
-var SITEMAP_COLLAPSE_VAR_NAME = 'c';
-var PLUGIN_VAR_NAME = 'g';
+﻿var PLUGIN_VAR_NAME = 'g';
 var FOOTNOTES_VAR_NAME = 'fn';
 var ADAPTIVE_VIEW_VAR_NAME = 'view';
 var SCALE_VAR_NAME = 'sc';
@@ -15,11 +12,6 @@ var lastRightPanelWidth = 220;
 var lastLeftPanelWidthDefault = 220;
 var lastRightPanelWidthDefault = 220;
 var toolBarOnly = true;
-// TODO: need to find a way to get rid of iphone X hacks!!!
-// - could possibly have app detect iphone and send information back to player, but currently, that information would arrive too late
-var iphoneX = false;
-var iphoneXFirstPass = true;
-
 
 // isolate scope
 (function () {
@@ -58,8 +50,8 @@ var iphoneXFirstPass = true;
         _settings.loadSitemap = configuration.loadSitemap;
         _settings.loadFeedbackPlugin = configuration.loadFeedbackPlugin;
         var cHash = getHashStringVar(SITEMAP_COLLAPSE_VAR_NAME);
-        _settings.startCollapsed = cHash == "1";
-        if (cHash == "2") closePlayer();
+        _settings.startCollapsed = cHash == SITEMAP_COLLAPSE_VALUE;
+        if (cHash == SITEMAP_CLOSE_VALUE) closePlayer();
         var gHash = getHashStringVar(PLUGIN_VAR_NAME);
         _settings.startPluginGid = gHash;
 
@@ -116,8 +108,16 @@ var iphoneXFirstPass = true;
         if (CHROME_5_LOCAL && !$('body').attr('pluginDetected')) {
             window.location = 'resources/chrome/chrome.html';
         }
-    });
 
+        if (FIREFOX && BROWSER_VERSION >= 68 && document.location.href.indexOf('file://') >= 0) { //detecting firefox and local
+            window.location = 'resources/chrome/firefox.html';
+        }
+    });
+    
+    $(window).on('hashchange', function() {
+        window.location.reload();
+    });
+    
     function appendOutOfDateNotification() {
         var toAppend = '';
         toAppend += '<div id="browserOutOfDateNotification">';
@@ -259,7 +259,6 @@ var iphoneXFirstPass = true;
             // IOS often does not complete updating innerHeight and innerWidth
             // until after calling orientation changed and resized window
             // Also, cannot use $(window).height() call since iOS11 needs padding amount
-            iphoneXFirstPass = false
             if (IOS && isMobileMode()) setTimeout(function () { $axure.player.resizeContent(true); }, 250);
         });
 
@@ -293,7 +292,8 @@ var iphoneXFirstPass = true;
         }
 
         if($axure.player.settings != null && !$axure.player.settings.isExpo) {
-            mainFrame.contentWindow.location.href = getInitialUrl();
+            const linkUrlWithVars = $axure.getLinkUrlWithVars(getInitialUrl());
+            mainFrame.contentWindow.location.href = linkUrlWithVars;
         }
     }
 
@@ -320,7 +320,7 @@ var iphoneXFirstPass = true;
         // map devices to their corresponding frame/bezel/overlays
     }
     var wasMobile = false;
-    var isMobileMode = $axure.player.isMobileMode = function () { return isShareApp() || (MOBILE_DEVICE && $(window).width() < 420); }
+    var isMobileMode = $axure.player.isMobileMode = function () { return $axure.utils.isShareApp() || (MOBILE_DEVICE && $(window).width() < 420); }
     var isMobileTextEntry = false;
 
     var isViewOverridden = $axure.player.isViewOverridden = function() {
@@ -377,15 +377,13 @@ var iphoneXFirstPass = true;
 
         if (isMobileMode()) {
             $container.addClass('mobileMode');
-            $('.noDiscussionText span').text('Comments added in Axure Cloud will appear here');
         } else {
             $container.removeClass('mobileMode');
-            $('.noDiscussionText span').text('Either select the button above to post to a location on the page, or use the field to post without location.');
         }
     }
 
     $axure.player.updatePlugins = function updatePlugins() {
-        if (MOBILE_DEVICE && !isShareApp()) {
+        if (MOBILE_DEVICE && !$axure.utils.isShareApp()) {
             var hostPanelPadding = isMobileMode() ? '8px 15px 0px 15px' : '';
             $('.rightPanel .leftPanel .mobileOnlyPanel').css('padding', hostPanelPadding);
         }
@@ -413,7 +411,7 @@ var iphoneXFirstPass = true;
 
     function deactivateMobileTextEntry() {
         newHeight = window.innerHeight;
-        var newControlHeight = newHeight - (!isShareApp() ? 140 : IOS ? 157 : 138);
+        var newControlHeight = newHeight - (!$axure.utils.isShareApp() ? 140 : IOS ? 157 : 138);
 
         if (!$('.leftPanel').hasClass('popup')) {
             $('.leftPanel').height(newControlHeight);
@@ -427,8 +425,8 @@ var iphoneXFirstPass = true;
         $('#mobileControlFrameContainer').hide();
 
         newHeight = window.innerHeight;
-        var newControlHeight = newHeight - (!isShareApp() ? 140 : IOS ? 157 : 138);
-        newControlHeight = newControlHeight + (!isShareApp() ? 61 : IOS ? 72 : 60);
+        var newControlHeight = newHeight - (!$axure.utils.isShareApp() ? 140 : IOS ? 157 : 138);
+        newControlHeight = newControlHeight + (!$axure.utils.isShareApp() ? 61 : IOS ? 72 : 60);
 
         if (!$('.leftPanel').hasClass('popup')) {
             $('.leftPanel').height(newControlHeight);
@@ -449,9 +447,6 @@ var iphoneXFirstPass = true;
 
     $axure.player.resizeContent = function (noViewport) {
         var isMobile = isMobileMode();
-
-        var $left = $('.leftPanel');
-        var $right= $('.rightPanel');
 
         if (wasMobile && !isMobile) {
             $('#clippingBoundsScrollContainer').show();
@@ -497,20 +492,10 @@ var iphoneXFirstPass = true;
 
         var newHeight = 0;
         var newWidth = 0;
-        if (iphoneX && isShareApp()) {
+        if (IOS && $axure.utils.isShareApp()) {
             // Hack for Iphone X
-            newHeight = $(window).height() - ((!isMobile && $('#topPanel').is(':visible')) ? $('#topPanel').height() : 0);
+            newHeight = iosInnerHeight();
             newWidth = $(window).width();
-            // This does not need to make sense, since it is Iphone X
-            var notchAndHomeOffsetPortrait = iphoneXFirstPass ? 35 : 5;
-            var notchOffsetLandscape = iphoneXFirstPass ? 45 : 10;
-            var homeButtonOffsetLandscape = iphoneXFirstPass ? 21 : 10;
-            if (newHeight > newWidth) {
-                newHeight = newHeight + notchAndHomeOffsetPortrait;
-            } else {
-                newWidth = newWidth + notchOffsetLandscape * 2;
-                newHeight = newHeight + homeButtonOffsetLandscape;
-            }
         } else {
             // innerHeight includes padding for window -- needed in iOS 11 to have prototype stretch to bottom of screen (could put in -- if (iOS) -- block if needed)
             //var newHeight = $(window).height() - ((!isMobile && $('#topPanel').is(':visible'))? $('#topPanel').height() : 0);
@@ -525,12 +510,12 @@ var iphoneXFirstPass = true;
         if (isMobile) {
             $('#mobileControlFrameContainer').height(newHeight);
             $('#mobileControlFrameContainer').width(newWidth);
-            var newControlHeight = newHeight - (!MOBILE_DEVICE ? 112 : !isShareApp() ? 140 : IOS ? 157 : 138);
+            var newControlHeight = newHeight - (!MOBILE_DEVICE ? 112 : !$axure.utils.isShareApp() ? 140 : IOS ? 157 : 138);
             // Screen resize is only way through browser to catch mobile device keyboard expand and collapse
             if ($('#mHideSidebar').is(':visible') && !$('#mobileControlFrameContainer').is(':visible')) {
                 $('#mobileControlFrameContainer').delay(150).show();
             } else if (isMobileTextEntry) {
-                newControlHeight = newControlHeight + (!isShareApp() ? 61 : IOS ? 72 : 60);
+                newControlHeight = newControlHeight + (!$axure.utils.isShareApp() ? 61 : IOS ? 72 : 60);
                 $('#mobileControlFrameContainer').hide();
             }
 
@@ -970,9 +955,11 @@ var iphoneXFirstPass = true;
             var x = (mainPanelWidth - w) / 2;
             var y = (mainPanelHeight - h) / 2 - 1;
 
-            x = Math.max(0, x);
-            if (scaleVal != 2) y = Math.max(0, y);
-
+            if (scaleVal != 2) {
+                x = Math.max(0, x);
+                y = Math.max(0, y);
+            }
+            
             $('#mainPanelContainer').attr({
                 "data-scale-shift-x": x,
                 "data-scale-shift-y": y,
@@ -980,7 +967,8 @@ var iphoneXFirstPass = true;
 
             $('#mainPanelContainer').css({
                 'margin': 'auto',
-                'top': y + 'px'
+                'top': y + 'px',
+                'left': (x < 0 ? x + 'px' : 'auto')
             });
 
             $('#clipFrameScroll').css({
@@ -1134,8 +1122,64 @@ var iphoneXFirstPass = true;
     function isSafari() {
         // Safari 3.0+ "[object HTMLElementConstructor]" 
         var liveSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification));
-        return liveSafari || SAFARI || (IOS && isShareApp());
+        return liveSafari || SAFARI || (IOS && $axure.utils.isShareApp());
     };
+
+    var iosInnerHeight = (function () {
+        if (!navigator.userAgent.match(/iphone|ipod|ipad/i)) {
+            /**
+             * Avoids conditional logic in the implementation
+             * @return {number} - window's innerHeight measurement in pixels
+             */
+            return function () {
+                return window.innerHeight;
+            };
+        }
+
+        // Store initial orientation
+        var axis = Math.abs(window.orientation);
+        // And hoist cached dimensions
+        var dims = { w: 0, h: 0 };
+
+        /**
+         * Creates an element with a height of 100vh since iOS accurately
+         * reports vp height (but not window.innerHeight). Then destroy it.
+         */
+        var createRuler = function () {
+            var ruler = document.createElement('div');
+
+            ruler.style.position = 'fixed';
+            ruler.style.height = '100vh';
+            ruler.style.width = 0;
+            ruler.style.top = 0;
+
+            document.documentElement.appendChild(ruler);
+
+            // Set cache conscientious of device orientation
+            dims.w = axis === 90 ? ruler.offsetHeight : window.innerWidth;
+            dims.h = axis === 90 ? window.innerWidth : ruler.offsetHeight;
+
+            // Clean up after ourselves
+            document.documentElement.removeChild(ruler);
+            ruler = null;
+        };
+
+        // Measure once
+        createRuler();
+
+        /**
+         * Returns window's cached innerHeight measurement
+         * based on viewport height and device orientation
+         * @return {number} - window's innerHeight measurement in pixels
+         */
+        return function () {
+            if (Math.abs(window.orientation) !== 90) {
+                return dims.h;
+            }
+
+            return dims.w;
+        };
+    }());
 
     function includeTokens(ajaxData, excludeUser) {
         //If the authCookieValue is set (a password-protected local prototype), then send the
@@ -1233,9 +1277,7 @@ var iphoneXFirstPass = true;
                 } else {
                     failure(response);
                 }
-            });
-            // TODO: add ldap authentication
-            //}, window.ON_PREM_LDAP_ENABLED);
+            }, window.ON_PREM_LDAP_ENABLED);
         } else {
             failure();
         }
@@ -1537,22 +1579,10 @@ var iphoneXFirstPass = true;
                     // Could stop automatic scaling on Ipads as well that we actually want, but for now, seems fine
                     $('body').css('-webkit-text-size-adjust', '100%');
 
-                    // Prepare for Iphone X hacks
-                    // Link for dimensions: https://kapeli.com/cheat_sheets/iOS_Design.docset/Contents/Resources/Documents/index
-                    var ratio = window.devicePixelRatio || 1;
-                    // Regular iphoneX
-                    if (IOS && window.screen.width * ratio == 1125 && window.screen.height * ratio === 2436) {
-                        iphoneX = true;
-                    }
-                    // Iphone XS Max and Iphone XR
-                    if (IOS && window.screen.width == 414 && window.screen.height === 896) {
-                        iphoneX = true;
-                    }
-
                     window.addEventListener("orientationchange", function () {
                         var viewport = document.querySelector("meta[name=viewport]");
                         //so iOS doesn't zoom when switching back to portrait
-                        if (iphoneX) {
+                        if (IOS) {
                             viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover');
                             viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, viewport-fit=cover');
                         } else {
@@ -1656,7 +1686,7 @@ var iphoneXFirstPass = true;
 
         $('#mobileControlFrameContainer').append(toAppend);
 
-        var barHeight = IOS ? (iphoneX ? '82px' : '72px') : '60px';
+        var barHeight = IOS ? '72px' : '60px';
         var returnIconDisplacement = IOS ? '-15px': '-20px';
         var iconTopMargin = IOS ? '14px': '7px';
         var returnTextTopMargin = IOS ? '9px': '7px';
@@ -1899,7 +1929,7 @@ var iphoneXFirstPass = true;
 
             // Get current scale of mainPanelContainer
             // MainPanelContainer scaled without setContentScale message
-            var scale = $('#mainPanelContainer').css('transform');;
+            var scale = $('#mainPanelContainer').css('transform');
             scale = (scale == "none") ? 1 : Number(scale.substring(scale.indexOf('(') + 1, scale.indexOf(',')));
             const scaledLeft = (left * scale) - (width / 2);
             const scaledTop = (top * scale) - (height / 2);
@@ -1963,6 +1993,25 @@ var iphoneXFirstPass = true;
         }
     }
 
+    function loadVariablesFromUrl(removeVarFromUrl) {
+        let originalHashValues = window.location.href.substr(window.location.href.indexOf('#')) || '';
+        let variables = {};
+        const query = (originalHashValues.split(GLOBAL_VAR_NAME)[1] || '');
+        
+        if(query.length > 0) {
+            $axure.utils.parseGlobalVars(query, function(varName, varValue) {
+                variables[varName] = varValue;
+            });
+            
+            if(removeVarFromUrl) {
+                originalHashValues = originalHashValues.replace(GLOBAL_VAR_NAME, "").replace(query, "");
+                replaceHash(originalHashValues);
+            }
+        }
+
+        return variables;
+    }
+    
     function getInitialUrl() {
         var shortId = getHashStringVar(PAGE_ID_NAME);
         var foundById = [];
@@ -2081,15 +2130,11 @@ var iphoneXFirstPass = true;
         }
     }
 
-    // This will return true if prototype is opened from version of app after update with code that sets this value 
-    // (won't be able to distinguish between browser and outdated app)
-    var isShareApp = function () { return /ShareApp/.test(navigator.userAgent); }
-
     function expand() {
         if ($axure.player.isMobileMode()) {
             $('#mHideSidebar').show();
             $('#mobileControlFrameContainer').show();
-            isShareApp() ? $('#nativeAppControlFrame').show() : $('#mobileBrowserControlFrame').show();
+            $axure.utils.isShareApp() ? $('#nativeAppControlFrame').show() : $('#mobileBrowserControlFrame').show();
         } else {
             $minimizeContainer = $('#interfaceControlFrameMinimizeContainer');
             $minimizeContainer.removeClass('collapseHovered');
@@ -2136,39 +2181,8 @@ var iphoneXFirstPass = true;
         return querystr;
     }
     
-    function setHashStringVar(currentHash, varName, varVal) {
-        var varWithEqual = varName + '=';
-        var poundVarWithEqual = varVal === '' ? '' : '#' + varName + '=' + varVal;
-        var ampVarWithEqual = varVal === '' ? '' : '&' + varName + '=' + varVal;
-        var hashToSet = '';
-
-        var pageIndex = currentHash.indexOf('#' + varWithEqual);
-        if (pageIndex == -1) pageIndex = currentHash.indexOf('&' + varWithEqual);
-        if (pageIndex != -1) {
-            var newHash = currentHash.substring(0, pageIndex);
-
-            newHash = newHash == '' ? poundVarWithEqual : newHash + ampVarWithEqual;
-
-            var ampIndex = currentHash.indexOf('&', pageIndex + 1);
-            if (ampIndex != -1) {
-                newHash = newHash == '' ? '#' + currentHash.substring(ampIndex + 1) : newHash + currentHash.substring(ampIndex);
-            }
-            hashToSet = newHash;
-        } else if (currentHash.indexOf('#') != -1) {
-            hashToSet = currentHash + ampVarWithEqual;
-        } else {
-            hashToSet = poundVarWithEqual;
-        }
-
-        if (hashToSet != '' || varVal == '') {
-            return hashToSet;
-        }
-
-        return null;
-    }
-
     $axure.player.setVarInCurrentUrlHash = function(varName, varVal) {
-        var newHash = setHashStringVar(window.location.hash, varName, varVal);
+        var newHash = $axure.utils.setHashStringVar(window.location.hash, varName, varVal);
 
         if (newHash != null) {
             replaceHash(newHash);
@@ -2205,7 +2219,7 @@ var iphoneXFirstPass = true;
         if (newHash != null) {
             replaceHash(newHash);
         }
-    }
+    };
 
     function setUpController() {
 
@@ -2224,8 +2238,10 @@ var iphoneXFirstPass = true;
         //Global Var array, getLinkUrl function and setGlobalVar listener are
         //for use in setting global vars in page url string when clicking a 
         //page in the sitemap
+        //NEW: this is now also used when navigating to a new window/popup,
+        //if there are global variables on the urls
         //-----------------------------------------
-        var _globalVars = {};
+        var _globalVars = loadVariablesFromUrl(true);
 
         //-----------------------------------------
         //Used by getLinkUrl below to check if local server is running 
@@ -2393,7 +2409,7 @@ var iphoneXFirstPass = true;
         }
 
         _player.pluginVisibleChanged = function(hostId, visible) {
-            if ($axure.player.isCloud && plugins[hostId]) {
+            if (plugins[hostId]) {
                 $axure.messageCenter.postMessage('pluginVisibleChanged', { id: hostId, gid: plugins[hostId].gid, visible: visible });
             }
         }
@@ -2476,6 +2492,11 @@ var iphoneXFirstPass = true;
             $(document).trigger('pluginShown', [getVisiblePlugins()]);
         };
 
+        _player.navigateToIssue = function (issueId) {
+            if (typeof feedback !== 'undefined') {
+                feedback.navigateToIssue(issueId);
+            }
+        };
     }
 
 
