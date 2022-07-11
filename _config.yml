@@ -85,7 +85,7 @@ author:
   school           : 'The Hong Kong University of Science and Technology'
   location         : "Hong Kong SAR"
   employer         :
-  googlescholar    : "EgDjnEEAAAAJ"
+  googlescholar    : "https://scholar.google.com/citations?user=EgDjnEEAAAAJ&hl=en"
   email            : "tuananh.vu@connect.ust.hk" #"tuananh05253@gmail.com"
   uri              :
   bitbucket        :
@@ -110,7 +110,7 @@ author:
   vine             :
   weibo            :
   xing             :
-  youtube          : "UCjpObIn0c26tg1eJauie-qA"
+  youtube          : #"UCjpObIn0c26tg1eJauie-qA"
   wikipedia        :
 
 
