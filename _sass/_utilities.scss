@@ -159,7 +159,7 @@ body:hover .visually-hidden button {
 /* file page content container */
 
 .full {
-  @include breakpoint($x-large){
+  @include breakpoint($large){
     margin-right: -1 * span(2.5 of 12) !important;
   }
 }
@@ -349,7 +349,7 @@ body:hover .visually-hidden button {
    ========================================================================== */
 
 .sticky {
-  @include breakpoint($x-large) {
+  @include breakpoint($large) {
     @include clearfix();
     position: -webkit-sticky;
     position: sticky;
