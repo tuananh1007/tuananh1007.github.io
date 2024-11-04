@@ -80,8 +80,8 @@ analytics:
 author:
   name             : "Tuan-Anh Vu"
   avatar           : "tuananh_avatar.jpg"
-  bio              : 'PhD in '
-  dept             : 'Computer Science and Engineering'
+  bio              : 'PhD in CSE'
+  dept             : 
   school           : 'The Hong Kong University of Science and Technology'
   location         : "Hong Kong SAR"
   employer         :
@@ -99,7 +99,7 @@ author:
   keybase          :
   instagram        :
   lastfm           :
-  linkedin         :
+  linkedin         : "https://www.linkedin.com/in/tuananhvu1007/"
   orcid            : 
   pinterest        :
   soundcloud       :
