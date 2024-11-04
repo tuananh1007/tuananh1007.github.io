@@ -80,9 +80,9 @@ analytics:
 author:
   name             : "Tuan-Anh Vu"
   avatar           : "tuananh_avatar.jpg"
-  bio              : "PhD in"
-  dept             : "Computer Science"
-  school           : "The Hong Kong University of Science and Technology"
+  bio              : 'PhD in'
+  dept             : 'Computer Science'
+  school           : 'The Hong Kong University of Science and Technology'
   location         : "Hong Kong SAR"
   employer         :
   googlescholar    : "https://scholar.google.com/citations?user=EgDjnEEAAAAJ&hl=en"
