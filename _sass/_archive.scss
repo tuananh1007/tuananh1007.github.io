@@ -9,7 +9,7 @@
     @include span(12 of 12);
   }
 
-  @include breakpoint($large) {
+  @include breakpoint($x-large) {
     @include span(10 of 12 last);
     @include prefix(0.5 of 12);
   }
@@ -87,7 +87,7 @@
     padding-right: $right-sidebar-width-narrow;
   }
 
-  @include breakpoint($large) {
+  @include breakpoint($x-large) {
     padding-right: $right-sidebar-width;
   }
 

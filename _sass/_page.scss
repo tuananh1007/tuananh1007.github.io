@@ -181,7 +181,7 @@
   opacity: 0.5;
   border-radius: $border-radius 0 $border-radius 0;
 
-  @include breakpoint($large) {
+  @include breakpoint($x-large) {
     padding: 5px 10px;
   }
 
@@ -327,7 +327,7 @@
   width: 60px;
   height: 60px;
 
-  @include breakpoint($large) {
+  @include breakpoint($x-large) {
     width: 100px;
     height: 100px;
   }
@@ -338,7 +338,7 @@
   height: 40px;
   border-radius: 50%;
 
-  @include breakpoint($large) {
+  @include breakpoint($x-large) {
     width: 80px;
     height: 80px;
     padding: 5px;
@@ -350,7 +350,7 @@
   float: right;
   width: calc(100% - 60px);
 
-  @include breakpoint($large) {
+  @include breakpoint($x-large) {
     width: calc(100% - 100px);
   }
 }
@@ -384,7 +384,7 @@
   @include clearfix();
   float: left;
 
-  @include breakpoint($large) {
+  @include breakpoint($x-large) {
     @include pre(2.5 of 12);
   }
 
