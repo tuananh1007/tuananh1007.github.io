@@ -80,10 +80,10 @@ analytics:
 author:
   name             : "Tuan-Anh Vu"
   avatar           : "tuananh_avatar.jpg"
-  bio              : 'PhD in'
-  dept             : 'Computer Science'
-  school           : 'The Hong Kong University of Science and Technology'
-  location         : "Hong Kong SAR"
+  bio              : 'Postdoctoral Researcher'
+  dept             : 'SCI Laboratory'
+  school           : 'University of California, Los Angeles'
+  location         : "America/Los_Angeles"
   employer         :
   googlescholar    : "https://scholar.google.com/citations?user=EgDjnEEAAAAJ&hl=en"
   email            : "tuananh.vu@connect.ust.hk" #"tuananh05253@gmail.com"
