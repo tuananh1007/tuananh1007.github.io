@@ -250,6 +250,7 @@
     </div>
 
     <div id="pub-count" style="font-size:0.8rem;color:var(--subtle);margin-bottom:1.25rem;"></div>
+    <p id="pub-category-title" class="subsection-title" style="margin-top:0;display:none;"></p>
 
     <div class="pub-list">
 
@@ -726,6 +727,7 @@
     </div><!-- end .pub-list -->
 
     <!-- Thesis & Dissertation -->
+    <div id="thesis-section">
     <p class="subsection-title" style="margin-top:2.5rem;">Thesis &amp; Dissertation</p>
     <div class="pub-list">
 
@@ -771,6 +773,7 @@
       </div>
 
     </div><!-- end thesis list -->
+    </div><!-- end #thesis-section -->
 
     <p style="margin-top:1.75rem;font-size:0.84rem;color:var(--muted);">
       Full list on
@@ -1027,9 +1030,21 @@
 
 <script>
   (function () {
-    const buttons  = document.querySelectorAll('.pub-filter-btn');
-    const items    = document.querySelectorAll('#publications .pub-item');
-    const countEl  = document.getElementById('pub-count');
+    const buttons    = document.querySelectorAll('.pub-filter-btn');
+    const items      = document.querySelectorAll('#publications .pub-item');
+    const countEl    = document.getElementById('pub-count');
+    const titleEl    = document.getElementById('pub-category-title');
+    const filterLabels = {
+      'selected':    'Selected Publications',
+      'all':         '',
+      '3d4d':        '3D & 4D Scene Understanding',
+      'robust':      'Robust Visual Perception',
+      'visionlang':  'Vision-Language & Foundation Models',
+      'robotics':    'Robot Perception & Autonomy',
+      'style':       'Neural Stylization',
+      'preprint':    'Preprint',
+      'thesis':      'Thesis & Dissertation'
+    };
 
     function applyFilter(filter) {
       let visible = 0;
@@ -1042,6 +1057,19 @@
         item.style.display = show ? '' : 'none';
         if (show) visible++;
       });
+      // Show thesis section only when filter is 'all' or 'thesis'
+      const thesisSection = document.getElementById('thesis-section');
+      if (thesisSection) {
+        thesisSection.style.display = (filter === 'all' || filter === 'thesis') ? '' : 'none';
+      }
+      // Update category title (hide for 'all' and 'thesis' since thesis has its own heading)
+      const catLabel = filterLabels[filter] || '';
+      if (catLabel && filter !== 'thesis') {
+        titleEl.textContent = catLabel;
+        titleEl.style.display = '';
+      } else {
+        titleEl.style.display = 'none';
+      }
       const label = filter === 'selected'
         ? 'Showing ' + visible + ' selected publications'
         : filter === 'all'
