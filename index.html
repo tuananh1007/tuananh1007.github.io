@@ -16,6 +16,7 @@
     <span class="nav-name">Tuan-Anh Vu</span>
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
+      <li><a href="#agenda">Agenda</a></li>
       <li><a href="#news">News</a></li>
       <li><a href="#publications">Publications</a></li>
       <li><a href="#grants">Grants</a></li>
@@ -109,26 +110,39 @@
         <div style="margin-top: 1.5rem; margin-bottom: 1.5rem;">
           <img src="images/research_themes.png" alt="Research Themes Overview" style="width: 100%; border-radius: var(--radius); display: block;">
         </div>
+        <p class="arc-thesis">
+          I build toward <em>trustworthy embodied intelligence</em> in four steps: <em>perceive</em> what ordinary
+          vision misses, <em>model</em> it in 3D and 4D as the scene changes, <em>act</em> on it safely on real
+          platforms, and <em>ground</em> it in language domain experts can actually use.
+        </p>
         <div class="interest-grid" style="margin-top: 0;">
           <div class="interest-card">
-            <div class="interest-icon">🌐</div>
-            <h3>3D &amp; 4D Scene Understanding</h3>
-            <p>Point clouds, Gaussian splatting, neural fields, dynamic reconstruction, flow estimation</p>
+            <div class="arc-step"><span class="arc-num">01</span> Perceive</div>
+            <h3>See what standard vision misses</h3>
+            <p>Recover targets that defeat models trained on ordinary appearance — camouflaged, transparent,
+               occluded, or visible only in thermal and near-infrared.</p>
+            <div class="arc-meta"><span>Robust Visual Perception</span><span>5 papers</span><span>IJCV, WACV</span></div>
           </div>
           <div class="interest-card">
-            <div class="interest-icon">👁</div>
-            <h3>Robust Visual Perception</h3>
-            <p>Transparent &amp; reflective objects, camouflaged targets, multimodal sensor fusion</p>
+            <div class="arc-step"><span class="arc-num">02</span> Model</div>
+            <h3>Keep a 3D/4D world model correct while the scene moves</h3>
+            <p>Joint reconstruction and motion, Gaussian splatting, neural fields, and registration that hold up
+               when geometry deforms rather than only on static captures.</p>
+            <div class="arc-meta"><span>3D &amp; 4D Scene Understanding</span><span>9 papers</span><span>ECCV Oral, AAAI, 3DV, BMVC</span></div>
           </div>
           <div class="interest-card">
-            <div class="interest-icon">🤖</div>
-            <h3>Robot Perception &amp; Autonomy</h3>
-            <p>Field robotics, drone navigation, robotic manipulation, safe vision-LLM systems</p>
+            <div class="arc-step"><span class="arc-num">03</span> Act</div>
+            <h3>Turn perception into safe autonomy on real platforms</h3>
+            <p>Onboard vision–language–action control, degeneracy-aware state estimation, and safety analysis for
+               UAVs, ground robots, and manipulators in the field.</p>
+            <div class="arc-meta"><span>Robot Perception &amp; Autonomy</span><span>9 papers</span><span>AAAI Oral, CoRL, T-RO</span></div>
           </div>
           <div class="interest-card">
-            <div class="interest-icon">🗣</div>
-            <h3>Vision-Language &amp; Foundation Models</h3>
-            <p>Referring segmentation, open-vocabulary detection, domain-specific model adaptation</p>
+            <div class="arc-step"><span class="arc-num">04</span> Ground</div>
+            <h3>Make what a robot sees describable and queryable</h3>
+            <p>Domain foundation models and referring segmentation that turn raw perception into something a
+               marine biologist or agronomist can search, question, and trust.</p>
+            <div class="arc-meta"><span>Vision-Language &amp; Foundation Models</span><span>9 papers</span><span>ECCV Oral, MMM, WACV</span></div>
           </div>
         </div>
       </div>
@@ -226,6 +240,120 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== RESEARCH AGENDA ===================== -->
+<section id="agenda">
+  <div class="container">
+    <p class="section-label">Looking Ahead</p>
+    <h2 class="section-title">Research Agenda</h2>
+
+    <p class="agenda-intro">
+      My vision is <strong>trustworthy AI from models to systems to applications</strong>: multimodal and
+      spatiotemporal models that stay reliable under open-world shift; scalable, resource-aware systems that
+      expose uncertainty rather than hide it; and decision-centered applications validated through repeatable
+      experiments in the environments where they must operate. AI succeeds in a laboratory when a model predicts
+      accurately on a fixed benchmark — it succeeds in the world only when the whole pipeline keeps working as
+      sensors, environments, and tasks change.
+    </p>
+
+    <p class="agenda-question">
+      The central question: <strong>how can an AI system preserve useful, calibrated behavior when its data,
+      sensors, compute budget, and operational objective all change?</strong>
+    </p>
+
+    <div class="agenda-list">
+
+      <div class="agenda-item">
+        <div><div class="agenda-num">01</div></div>
+        <div>
+          <div class="agenda-layer">Models</div>
+          <h3>Open-world multimodal and spatiotemporal learning</h3>
+          <p class="agenda-goal">
+            Create data-efficient models that integrate vision, geometry, language, and heterogeneous sensor
+            signals while detecting and communicating uncertainty under distribution shift.
+          </p>
+          <p>
+            Rather than assuming every modality is always available and reliable, I study modality-aware
+            representation learning: objectives that exploit complementary cues during training but stay stable
+            when a sensor is missing, degraded, or replaced. Robustness is measured not by average accuracy alone,
+            but by calibration under shift, worst-group performance, recovery after sensor degradation, and how
+            much new data or computation adaptation costs.
+          </p>
+          <ul class="agenda-points">
+            <li><strong>Selective and calibrated prediction</strong> — uncertainty estimation, out-of-distribution detection, and abstention criteria tied to the cost of downstream errors</li>
+            <li><strong>Data-efficient adaptation</strong> — self-supervised and test-time methods that learn from unlabeled streams without catastrophic drift</li>
+            <li><strong>Spatial-temporal foundation models</strong> — representations that jointly encode appearance, geometry, motion, and semantic context across 2D–4D data</li>
+          </ul>
+          <div class="agenda-basis">
+            <strong>Grounded in</strong><br>
+            TransCues (WACV 2026) &middot; Catch Me If You Can Describe Me (IJCV) &middot; CamoVid60K (IJCV)
+            &middot; Physics-Regularized Latent Representations (IJCV, under review) &middot; HiddenObject
+          </div>
+        </div>
+      </div>
+
+      <div class="agenda-item">
+        <div><div class="agenda-num">02</div></div>
+        <div>
+          <div class="agenda-layer">Systems</div>
+          <h3>Scalable dynamic world models, from cloud to edge</h3>
+          <p class="agenda-goal">
+            Turn learned representations into systems that update a 3D/4D world state online, operate within
+            latency and energy budgets, and expose actionable reliability signals to users and decision modules.
+          </p>
+          <p>
+            The contribution here is not a faster inference engine but an <strong>observable AI pipeline</strong>,
+            in which data provenance, model version, confidence, latency, and task outcome can be traced together.
+            Streaming world models should maintain geometry, motion, semantics, and uncertainty as new
+            observations arrive, across three scales usually studied in isolation.
+          </p>
+          <ul class="agenda-points">
+            <li><strong>Training scale</strong> — distributed experiments and controlled data engines for multimodal pretraining, adaptation, and rare-event generation</li>
+            <li><strong>Representation scale</strong> — compact, online-updatable scene models with consistency checks, change detection, and memory management over long deployments</li>
+            <li><strong>Deployment scale</strong> — profiling-guided compression, cloud–edge partitioning, runtime monitoring, and fallback behavior under compute or sensor failure</li>
+          </ul>
+          <div class="agenda-basis">
+            <strong>Grounded in</strong><br>
+            RFNet-4D (ECCV 2022 Oral) &middot; Test-Time Augmentation (3DV 2024) &middot; Cross4D-JEPA
+            &middot; DePT3R &middot; NIR + metadata Gaussian splatting (AAAI 2026)
+            &middot; Degeneracy-aware VIO (IEEE T-RO, under review)
+          </div>
+        </div>
+      </div>
+
+      <div class="agenda-item">
+        <div><div class="agenda-num">03</div></div>
+        <div>
+          <div class="agenda-layer">Applications</div>
+          <h3>Decision-centered AI, validated where it has to work</h3>
+          <p class="agenda-goal">
+            Co-design AI with domain partners so that model confidence and system behavior improve measurable
+            decisions — not benchmark accuracy alone.
+          </p>
+          <p>
+            I use demanding field applications as stress tests that reveal general AI and systems questions.
+            Agricultural and marine platforms remain my development testbeds because they permit controlled study
+            of occlusion, environmental shift, and rare failures before methods transfer elsewhere. The shared
+            experiment across domains is to propagate a perturbation through the stack and measure how a sensing
+            change alters confidence, latency, decisions, safety, and recovery.
+          </p>
+          <ul class="agenda-points">
+            <li><strong>Agriculture</strong> — crop intelligence under occlusion and shift, longitudinal digital twins and precision mapping, and reliable edge AI for targeted spraying, scouting, biological pest control, and robotic pollination</li>
+            <li><strong>Manufacturing and inspection</strong> — multimodal detection of transparent, reflective, occluded, or novel parts, and dynamic reconstruction for robotic inspection and manipulation</li>
+            <li><strong>Transportation and logistics</strong> — persistent 3D/4D mapping, asset monitoring, and risk-aware mobile autonomy where latency, coverage, and recovery matter as much as recognition</li>
+          </ul>
+          <div class="agenda-basis">
+            <strong>Grounded in</strong><br>
+            VLA-Flight (CoRL, under review) &middot; AgriChrono &middot; AgriDrone &middot; Robotic pollination
+            &middot; MarineInst (ECCV 2024 Oral) &middot; MarineVRS &middot; Marine Video Kit
+            &middot; NSF CPS award (Senior Personnel) and 2.25M ACCESS credits as PI / Co-PI
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -328,10 +456,10 @@
     <div class="pub-filter" role="group" aria-label="Filter publications">
       <button class="pub-filter-btn active" data-filter="selected">Selected</button>
       <button class="pub-filter-btn" data-filter="all">All</button>
-      <button class="pub-filter-btn" data-filter="3d4d">3D &amp; 4D Scene Understanding</button>
-      <button class="pub-filter-btn" data-filter="robust">Robust Visual Perception</button>
-      <button class="pub-filter-btn" data-filter="visionlang">Vision-Language &amp; Foundation Models</button>
-      <button class="pub-filter-btn" data-filter="robotics">Robot Perception &amp; Autonomy</button>
+      <button class="pub-filter-btn" data-filter="robust">01 · Perceive</button>
+      <button class="pub-filter-btn" data-filter="3d4d">02 · Model</button>
+      <button class="pub-filter-btn" data-filter="robotics">03 · Act</button>
+      <button class="pub-filter-btn" data-filter="visionlang">04 · Ground</button>
       <button class="pub-filter-btn" data-filter="mlfound">ML Foundations &amp; Analysis</button>
       <button class="pub-filter-btn" data-filter="style">Neural Stylization</button>
       <button class="pub-filter-btn" data-filter="preprint">Preprints &amp; Under Review</button>
@@ -356,6 +484,7 @@
             <span class="venue-pill">ECCV 2026</span>
             <span class="badge badge-new">New</span>
           </div>
+          <div class="pub-contrib">Recasts marine video understanding as event-centric reasoning, letting the model invoke visual tools to work out what happened rather than captioning frames in isolation.</div>
           <div class="pub-links">
             <a href="https://arxiv.org/abs/2607.24064" target="_blank" rel="noopener">↗ Paper</a>
           </div>
@@ -373,6 +502,7 @@
             <span class="venue-pill">BMVC 2026</span>
             <span class="badge badge-new">New</span>
           </div>
+          <div class="pub-contrib">Uses a frozen world model as an external critic to pull video generations back toward physically plausible motion, without retraining the generator.</div>
           <div class="pub-links">
             <a href="https://arxiv.org/abs/2608.29904" target="_blank" rel="noopener">↗ Paper</a>
           </div>
@@ -390,6 +520,7 @@
             <span class="venue-pill">BMVC 2026</span>
             <span class="badge badge-new">New</span>
           </div>
+          <div class="pub-contrib">Brings sparse state-space sequence modelling to forest-scale point clouds, using geometry-guided queries to segment structure where dense attention is impractical.</div>
           <div class="pub-links">
             <a href="https://arxiv.org/abs/2606.01549" target="_blank" rel="noopener">↗ Paper</a>
           </div>
@@ -408,6 +539,7 @@
             <span class="badge badge-ijcv">Journal</span>
             <span class="badge badge-new">New</span>
           </div>
+          <div class="pub-contrib">Shows diffusion features retain the boundary evidence camouflage suppresses, enabling instance segmentation of camouflaged objects from open-vocabulary text instead of a fixed class list.</div>
           <div class="pub-extra">Earlier version at the <strong>ECCV 2024 CV4Ecology Workshop</strong>.</div>
           <div class="pub-links">
             <a href="https://catchme.hkustvgd.com" target="_blank" rel="noopener">↗ Project Page</a>
@@ -428,6 +560,7 @@
             <span class="badge badge-ijcv">Journal</span>
             <span class="badge badge-new">New</span>
           </div>
+          <div class="pub-contrib">Supplies a large-scale video benchmark for camouflaged animals in motion, where the revealing signal is temporal rather than appearance-based.</div>
           <div class="pub-extra">Also at the <strong>CVPR 2025 CV4Animals Workshop</strong> — Oral, with Travel Award.</div>
           <div class="pub-links">
             <a href="https://camovid60k.hkustvgd.com" target="_blank" rel="noopener">↗ Project Page</a>
@@ -447,6 +580,7 @@
             <span class="venue-pill">WACV 2026</span>
             <span class="badge badge-new">New</span>
           </div>
+          <div class="pub-contrib">Segments transparent objects by explicitly modelling the two cues that survive transparency — boundary and reflection — inside a pyramid vision transformer.</div>
           <div class="pub-extra">Earlier version at the <strong>ECCV 2024 Transparent &amp; Reflective Objects In the Wild Workshop</strong>.</div>
           <div class="pub-links">
             <a href="https://transcues.hkustvgd.com/" target="_blank" rel="noopener">↗ Project Page</a>
@@ -466,6 +600,7 @@
             <span class="venue-pill">AAAI 2026</span>
             <span class="badge badge-new">New</span>
           </div>
+          <div class="pub-contrib">Shows near-infrared imagery and capture metadata recover geometry that RGB-only Gaussian splatting misses on low-texture and poorly lit surfaces.</div>
           <div class="pub-extra">Earlier version at the <strong>CVPR 2025 2nd Workshop on Neural Fields Beyond Conventional Cameras</strong>.</div>
           <div class="pub-links">
             <a href="https://ojs.aaai.org/index.php/AAAI/article/view/37259" target="_blank" rel="noopener">↗ Paper</a>
@@ -485,6 +620,7 @@
             <span class="badge badge-oral">Oral &middot; 4.3%</span>
             <span class="badge badge-new">New</span>
           </div>
+          <div class="pub-contrib">Recasts multi-agent behaviour modelling around the geometry of agent interactions rather than treating each agent's trajectory independently.</div>
           <div class="pub-links">
             <a href="https://ojs.aaai.org/index.php/AAAI/article/view/39691" target="_blank" rel="noopener">↗ Paper</a>
           </div>
@@ -502,6 +638,7 @@
             <span class="venue-pill venue-pill-muted">AAAI 2027</span>
             <span class="badge badge-review">Under Review</span>
           </div>
+          <div class="pub-contrib">A diagnostic that separates how much egocentric 3D pose estimators depend on scene grounding versus feature adaptation, isolating where current methods actually fail.</div>
           <div class="pub-links">
             <a href="https://drive.google.com/file/d/1dLwaAMEDavUaLL55Bo8O7a8mhByz4V80/view" target="_blank" rel="noopener">↗ Paper</a>
           </div>
@@ -519,6 +656,7 @@
             <span class="venue-pill venue-pill-muted">WACV 2027</span>
             <span class="badge badge-review">Under Review</span>
           </div>
+          <div class="pub-contrib">Learns 4D point-cloud representations by distilling dense cross-modal correspondence, removing the need for annotated motion supervision.</div>
           <div class="pub-links">
             <a href="https://arxiv.org/abs/2607.00514" target="_blank" rel="noopener">↗ Paper</a>
           </div>
@@ -536,6 +674,7 @@
             <span class="venue-pill venue-pill-muted">CoRL 2026</span>
             <span class="badge badge-review">Under Review</span>
           </div>
+          <div class="pub-contrib">Fuses IMU directly into a lightweight vision-language-action policy so a UAV can close the control loop onboard instead of offloading perception.</div>
           <div class="pub-links">
             <a href="https://drive.google.com/file/d/1WhQQO4AQGy8BDq4CRV9x78zacCH7vQjP/view" target="_blank" rel="noopener">↗ Paper</a>
           </div>
@@ -553,6 +692,7 @@
             <span class="venue-pill venue-pill-muted">TMLR</span>
             <span class="badge badge-review">Under Review</span>
           </div>
+          <div class="pub-contrib">A controlled negative result: simplicial, hypergraph and spectral inductive biases in molecular GNNs do not compose, and stacking them buys no additive gain.</div>
           <div class="pub-links">
             <a href="https://drive.google.com/file/d/17rSQ54RypGf0IkyLIqYyME7hvaqL0Bw4/view" target="_blank" rel="noopener">↗ Paper</a>
           </div>
@@ -570,6 +710,7 @@
             <span class="venue-pill venue-pill-muted">IEEE T-RO</span>
             <span class="badge badge-review">Under Review</span>
           </div>
+          <div class="pub-contrib">Selects points by information gain and constrains the EKF along unobservable directions, keeping RGB-D visual-inertial odometry stable where scene geometry degenerates.</div>
           <div class="pub-links">
             <a href="https://drive.google.com/file/d/1M60E1ACWrSOv0OCHANtS39HpF17LdFcD/view" target="_blank" rel="noopener">↗ Paper</a>
           </div>
@@ -587,6 +728,7 @@
             <span class="venue-pill venue-pill-muted">IJCV</span>
             <span class="badge badge-review">Under Review</span>
           </div>
+          <div class="pub-contrib">Infers objects hidden from direct view by regularising the latent representation with the physics of how heat propagates through the occluding surface.</div>
           <div class="pub-links">
             <a href="https://drive.google.com/file/d/1gOnRAEW8uc9ykOzNnqKfHAtR9hA5ib53/view" target="_blank" rel="noopener">↗ Paper</a>
           </div>
@@ -604,6 +746,7 @@
             <span class="venue-pill venue-pill-muted">NeurIPS 2026</span>
             <span class="badge badge-review">Under Review</span>
           </div>
+          <div class="pub-contrib">Treats iterative LLM reasoning as a dynamical system, so the stability of a reasoning loop can be characterised rather than judged only from its final answer.</div>
           <div class="pub-links">
             <a href="https://drive.google.com/file/d/10DH38mQq3A-tFm3nNrBZUEyosEFpkjZc/view" target="_blank" rel="noopener">↗ Paper</a>
           </div>
@@ -621,6 +764,7 @@
             <span class="venue-pill venue-pill-muted">NeurIPS 2026</span>
             <span class="badge badge-review">Under Review</span>
           </div>
+          <div class="pub-contrib">Multi-stage alignment that keeps point-cloud registration robust across the range of overlap and initialisation regimes where single-stage methods break down.</div>
           <div class="pub-links">
             <a href="https://drive.google.com/file/d/1Yf1sggfr5H88Zpwoll3WL2jFu6wRjuCQ/view" target="_blank" rel="noopener">↗ Paper</a>
           </div>
@@ -638,6 +782,7 @@
             <span class="venue-pill venue-pill-muted">IEEE T-RL</span>
             <span class="badge badge-review">Under Review</span>
           </div>
+          <div class="pub-contrib">Maps the safety landscape of vision-language-action policies around the human, setting out where today's robot policies leave people exposed.</div>
           <div class="pub-links">
             <a href="https://drive.google.com/file/d/1_SwWeljprB1owU09Zfy3HTDZ0x7xXcmG/view" target="_blank" rel="noopener">↗ Paper</a>
           </div>
@@ -655,6 +800,7 @@
             <span class="venue-pill venue-pill-muted">MobiCom 2026</span>
             <span class="badge badge-review">Under Review</span>
           </div>
+          <div class="pub-contrib">An edge-deployed 360° rig that makes continuous underwater panoramic monitoring practical without a surface tether or offboard compute.</div>
           <div class="pub-links">
             <a href="https://drive.google.com/file/d/15tNqj8rM6FI8KpwpcbKpaZpWpBRc7HpP/view" target="_blank" rel="noopener">↗ Paper</a>
           </div>
@@ -671,6 +817,7 @@
           <div class="pub-meta">
             <span class="badge badge-preprint">Preprint</span>
           </div>
+          <div class="pub-contrib">Pairs a multi-sensor greenhouse dataset with a vision backbone sized for the compute a drone can actually carry indoors.</div>
           <div class="pub-links">
             <a href="https://drive.google.com/file/d/1zzCU34SfhJxuMddCKZHrXoYRtEtvtSos/view" target="_blank" rel="noopener">↗ Paper</a>
           </div>
@@ -687,6 +834,7 @@
           <div class="pub-meta">
             <span class="badge badge-preprint">Preprint</span>
           </div>
+          <div class="pub-contrib">Finds that path-deviation signal is already present in a VLA policy's own attention heads, so drift can be detected by reading the policy rather than training a separate monitor.</div>
           <div class="pub-links">
             <a href="https://arxiv.org/abs/2603.13782" target="_blank" rel="noopener">↗ Paper</a>
           </div>
@@ -705,6 +853,7 @@
           <div class="pub-meta">
             <span class="badge badge-preprint">Preprint</span>
           </div>
+          <div class="pub-contrib">Recovers dense point tracks and 3D structure of a dynamic scene in a single forward pass, dropping the usual per-scene optimisation loop.</div>
           <div class="pub-links">
             <a href="https://arxiv.org/abs/2512.13122" target="_blank" rel="noopener">↗ Paper</a>
           </div>
@@ -721,6 +870,7 @@
           <div class="pub-meta">
             <span class="badge badge-preprint">Preprint</span>
           </div>
+          <div class="pub-contrib">Fuses arbitrary sensing modalities for hidden-object detection without assuming in advance which modality will be available at test time.</div>
           <div class="pub-links">
             <a href="https://github.com/StructuresComp/hidden-fruits" target="_blank" rel="noopener">↗ Code</a>
             <a href="https://arxiv.org/abs/2508.21135" target="_blank" rel="noopener">↗ Paper</a>
@@ -738,6 +888,7 @@
           <div class="pub-meta">
             <span class="badge badge-preprint">Preprint</span>
           </div>
+          <div class="pub-contrib">Closes the loop from visual flower detection to targeted grasp-and-vibrate, demonstrating robotic pollination in a controlled environment.</div>
           <div class="pub-links">
             <a href="https://arxiv.org/abs/2510.06146" target="_blank" rel="noopener">↗ Paper</a>
             <a href="https://github.com/StructuresComp/robotic-pollination" target="_blank" rel="noopener">↗ Code</a>
@@ -755,6 +906,7 @@
           <div class="pub-meta">
             <span class="badge badge-preprint">Preprint</span>
           </div>
+          <div class="pub-contrib">Captures crop growth and lighting variation over time with a field robot, giving a dataset where the scene itself changes rather than only the viewpoint.</div>
           <div class="pub-links">
             <a href="https://jaehwan-j.github.io/agrichrono/" target="_blank" rel="noopener">↗ Project Page</a>
             <a href="https://arxiv.org/abs/2508.18694" target="_blank" rel="noopener">↗ Paper</a>
@@ -773,6 +925,7 @@
           <div class="pub-meta">
             <span class="venue-pill">WACV 2025</span>
           </div>
+          <div class="pub-contrib">Injects visual context into the text branch of referring segmentation, moving the model from object-level matching to context-level understanding.</div>
           <div class="pub-links">
             <a href="https://vatex.hkustvgd.com/" target="_blank" rel="noopener">↗ Project Page</a>
             <a href="https://openaccess.thecvf.com/content/WACV2025/html/Nguyen-Truong_Vision-Aware_Text_Features_in_Referring_Image_Segmentation_From_Object_Understanding_WACV_2025_paper.html" target="_blank" rel="noopener">↗ Paper</a>
@@ -792,6 +945,7 @@
           <div class="pub-meta">
             <span class="badge badge-preprint">Preprint</span>
           </div>
+          <div class="pub-contrib">Learns spatio-temporal cross features bidirectionally, so time-varying point clouds can be reconstructed under weak supervision.</div>
           <div class="pub-links">
             <a href="https://drive.google.com/file/d/1Luwdio1reWL9m-JJSI_gF042T4HpfYRi/view" target="_blank" rel="noopener">↗ Paper</a>
           </div>
@@ -808,6 +962,7 @@
           <div class="pub-meta">
             <span class="venue-pill">3DV 2024</span>
           </div>
+          <div class="pub-contrib">Shows test-time augmentation carries over to 3D point clouds, improving classification and segmentation with no retraining.</div>
           <div class="pub-links">
             <a href="https://tta.hkustvgd.com/" target="_blank" rel="noopener">↗ Project Page</a>
             <a href="https://arxiv.org/abs/2311.13152" target="_blank" rel="noopener">↗ Paper</a>
@@ -827,6 +982,7 @@
             <span class="venue-pill">ECCV 2024</span>
             <span class="badge badge-oral">Oral &middot; 2.3%</span>
           </div>
+          <div class="pub-contrib">A marine foundation model that segments instances and describes them, so its output is usable by biologists rather than only by other models.</div>
           <div class="pub-links">
             <a href="https://marineinst.hkustvgd.com/" target="_blank" rel="noopener">↗ Project Page</a>
             <a href="https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/00223.pdf" target="_blank" rel="noopener">↗ Paper</a>
@@ -846,6 +1002,7 @@
             <span class="venue-pill">ECCV 2024</span>
             <span class="badge badge-patent">US Patent (filed)</span>
           </div>
+          <div class="pub-contrib">Stylises city-scale 3D scenes consistently across views and geometry, where per-image stylisation would flicker.</div>
           <div class="pub-extra">Also Oral at the <strong>ECCV 2024 CV4Metaverse Workshop</strong>.</div>
           <div class="pub-links">
             <a href="https://chenyingshu.github.io/stylecity3d" target="_blank" rel="noopener">↗ Project Page</a>
@@ -864,6 +1021,7 @@
           <div class="pub-meta">
             <span class="badge badge-preprint">Preprint</span>
           </div>
+          <div class="pub-contrib">An early systematic probe of where GPT-4V succeeds and fails on marine imagery, establishing the gap that domain-specific models needed to close.</div>
           <div class="pub-links">
             <a href="https://marinegpt.hkustvgd.com/" target="_blank" rel="noopener">↗ Project Page</a>
             <a href="https://arxiv.org/abs/2401.02147" target="_blank" rel="noopener">↗ Paper</a>
@@ -882,6 +1040,7 @@
           <div class="pub-meta">
             <span class="badge badge-preprint">Preprint</span>
           </div>
+          <div class="pub-contrib">Shows typographic attacks transfer across vision-LLMs in driving scenes, exposing a practical attack surface for deployed autonomy.</div>
           <div class="pub-links">
             <a href="https://arxiv.org/abs/2405.14169" target="_blank" rel="noopener">↗ Paper</a>
           </div>
@@ -901,6 +1060,7 @@
             <span class="venue-pill">OCEANS 2023</span>
             <span class="badge badge-oral">Oral</span>
           </div>
+          <div class="pub-contrib">Retrieval over marine video with an explainable path from query to segment, so a result can be justified to a domain expert.</div>
           <div class="pub-links">
             <a href="https://marinevrs.hkustvgd.com/" target="_blank" rel="noopener">↗ Project Page</a>
             <a href="https://arxiv.org/abs/2306.04593" target="_blank" rel="noopener">↗ Paper</a>
@@ -920,6 +1080,7 @@
             <span class="venue-pill">MMM 2023</span>
             <span class="badge badge-oral">Oral</span>
           </div>
+          <div class="pub-contrib">A marine video dataset built for content-based retrieval, addressing a domain shift that general-purpose video corpora do not cover.</div>
           <div class="pub-links">
             <a href="https://mvk.hkustvgd.com/" target="_blank" rel="noopener">↗ Project Page</a>
             <a href="https://link.springer.com/chapter/10.1007/978-3-031-27077-2_42" target="_blank" rel="noopener">↗ Paper (Springer)</a>
@@ -939,6 +1100,7 @@
           <div class="pub-meta">
             <span class="badge badge-preprint">Preprint</span>
           </div>
+          <div class="pub-contrib">A domain-tuned vision-language model that answers marine questions with the specificity general assistants lack.</div>
           <div class="pub-links">
             <a href="https://marinegpt.hkustvgd.com/" target="_blank" rel="noopener">↗ Project Page</a>
             <a href="https://arxiv.org/abs/2310.13596" target="_blank" rel="noopener">↗ Paper</a>
@@ -960,6 +1122,7 @@
             <span class="venue-pill">ECCV 2022</span>
             <span class="badge badge-oral">Oral &middot; 2.7%</span>
           </div>
+          <div class="pub-contrib">Learns reconstruction and motion flow jointly from raw 4D point clouds, instead of reconstructing each frame and matching afterwards.</div>
           <div class="pub-links">
             <a href="https://tuananh1007.github.io/RFNet-4D/" target="_blank" rel="noopener">↗ Project Page</a>
             <a href="https://www.ecva.net/papers/eccv_2022/papers_ECCV/papers/136830036.pdf" target="_blank" rel="noopener">↗ Paper</a>
@@ -981,6 +1144,7 @@
             <span class="venue-pill">ICCP 2022</span>
             <span class="badge badge-oral">Oral</span>
           </div>
+          <div class="pub-contrib">Transfers time-of-day appearance to architectural photographs while preserving structure, separating illumination from geometry.</div>
           <div class="pub-links">
             <a href="https://chenyingshu.github.io/time_of_day/" target="_blank" rel="noopener">↗ Project Page</a>
             <a href="https://chenyingshu.github.io/time_of_day/assets/ICCP_2022_paper.pdf" target="_blank" rel="noopener">↗ Paper</a>
@@ -1424,10 +1588,10 @@
     const filterLabels = {
       'selected':    'Selected Publications',
       'all':         '',
-      '3d4d':        '3D & 4D Scene Understanding',
-      'robust':      'Robust Visual Perception',
-      'visionlang':  'Vision-Language & Foundation Models',
-      'robotics':    'Robot Perception & Autonomy',
+      'robust':      '01 · Perceive — Robust Visual Perception',
+      '3d4d':        '02 · Model — 3D & 4D Scene Understanding',
+      'robotics':    '03 · Act — Robot Perception & Autonomy',
+      'visionlang':  '04 · Ground — Vision-Language & Foundation Models',
       'mlfound':     'ML Foundations & Analysis',
       'style':       'Neural Stylization',
       'preprint':    'Preprints & Manuscripts Under Review',

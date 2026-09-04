@@ -395,6 +395,55 @@ section:last-of-type { border-bottom: none; }
   line-height: 1;
 }
 
+/* One-line research thesis above the arc */
+.arc-thesis {
+  font-family: var(--serif);
+  font-size: 1.02rem;
+  line-height: 1.6;
+  color: var(--text);
+  border-left: 3px solid var(--accent);
+  padding-left: 0.95rem;
+  margin-bottom: 1.4rem;
+}
+.arc-thesis em { color: var(--accent); font-style: normal; font-weight: 600; }
+
+/* Numbered step badge on each arc card */
+.arc-step {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+.arc-step .arc-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--accent-light);
+  border: 1px solid var(--accent-mid);
+  font-size: 0.62rem;
+  letter-spacing: 0;
+}
+
+.arc-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 0.5rem;
+  margin-top: 0.6rem;
+  padding-top: 0.55rem;
+  border-top: 1px solid var(--border-light);
+  font-size: 0.7rem;
+  color: var(--subtle);
+}
+.arc-meta span:not(:last-child)::after { content: ' ·'; }
+
 .interest-card h3 {
   font-size: 0.875rem;
   font-weight: 600;
@@ -604,6 +653,16 @@ section:last-of-type { border-bottom: none; }
 }
 
 /* Secondary venue line: workshop versions, patents, prior appearances. */
+/* One-sentence statement of what a paper contributed. */
+.pub-contrib {
+  font-size: 0.815rem;
+  color: var(--muted);
+  line-height: 1.55;
+  border-left: 2px solid var(--accent-mid);
+  padding-left: 0.65rem;
+  margin: 0 0 0.55rem;
+}
+
 .pub-extra {
   font-size: 0.775rem;
   color: var(--subtle);
@@ -828,6 +887,127 @@ section:last-of-type { border-bottom: none; }
 .award-text strong { color: var(--text); font-weight: 600; }
 
 /* ============================================================
+   RESEARCH AGENDA
+   ============================================================ */
+.agenda-intro {
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.7;
+  max-width: 70ch;
+  margin-bottom: 1.9rem;
+}
+.agenda-intro strong { color: var(--text); font-weight: 600; }
+
+.agenda-question {
+  font-family: var(--serif);
+  font-size: 1.02rem;
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--accent-light);
+  border: 1px solid var(--accent-mid);
+  border-radius: var(--radius);
+  padding: 1rem 1.2rem;
+  margin-bottom: 2rem;
+}
+.agenda-question strong { font-style: normal; font-weight: 700; color: var(--accent); }
+
+.agenda-list { display: flex; flex-direction: column; }
+
+.agenda-item {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 0 1.1rem;
+  padding: 1.6rem 0;
+  border-bottom: 1px solid var(--border-light);
+}
+.agenda-item:last-child { border-bottom: none; padding-bottom: 0; }
+.agenda-item:first-child { padding-top: 0; }
+
+.agenda-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--accent-light);
+  border: 1px solid var(--accent-mid);
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.agenda-layer {
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--subtle);
+  margin-bottom: 0.15rem;
+}
+
+.agenda-item h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.35;
+  margin-bottom: 0.45rem;
+  letter-spacing: -0.01em;
+}
+
+.agenda-goal {
+  font-size: 0.85rem;
+  color: var(--text);
+  line-height: 1.6;
+  border-left: 2px solid var(--accent-mid);
+  padding-left: 0.7rem;
+  margin-bottom: 0.7rem;
+}
+
+.agenda-item > div > p {
+  font-size: 0.85rem;
+  color: var(--muted);
+  line-height: 1.65;
+  margin-bottom: 0.7rem;
+}
+
+.agenda-points { list-style: none; margin: 0 0 0.75rem; padding: 0; }
+.agenda-points li {
+  position: relative;
+  padding-left: 0.95rem;
+  margin-bottom: 0.35rem;
+  font-size: 0.82rem;
+  color: var(--muted);
+  line-height: 1.55;
+}
+.agenda-points li::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0.6em;
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--accent-mid);
+}
+.agenda-points strong { color: var(--text); font-weight: 600; }
+
+.agenda-basis {
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--border-light);
+  font-size: 0.745rem;
+  color: var(--subtle);
+  line-height: 1.6;
+}
+.agenda-basis strong {
+  color: var(--muted);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  font-size: 0.66rem;
+}
+
+/* ============================================================
    GRANTS & FUNDING
    ============================================================ */
 .grants-intro {
@@ -937,8 +1117,10 @@ footer .container {
   .grant-item          { grid-template-columns: 1fr; gap: 0.35rem; }
   .grant-amount        { color: var(--green); }
   .stat-grid           { grid-template-columns: 1fr 1fr; }
+  .agenda-item         { grid-template-columns: 1fr; gap: 0.6rem; }
   footer .container    { flex-direction: column; gap: 0.5rem; text-align: center; }
-  nav .container       { gap: 0.5rem; }
-  .nav-links           { gap: 0; }
-  .nav-links a         { padding: 0.3rem 0.5rem; }
+  nav .container       { gap: 0.4rem; justify-content: center; }
+  .nav-name            { display: none; }
+  .nav-links           { gap: 0; flex-wrap: wrap; justify-content: center; }
+  .nav-links a         { padding: 0.3rem 0.45rem; font-size: 0.78rem; }
 }
