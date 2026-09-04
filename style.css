@@ -372,8 +372,11 @@ section:last-of-type { border-bottom: none; }
 
 .interest-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 0.85rem;
+}
+@media (max-width: 1000px) {
+  .interest-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 .interest-card {
@@ -403,7 +406,7 @@ section:last-of-type { border-bottom: none; }
   color: var(--text);
   border-left: 3px solid var(--accent);
   padding-left: 0.95rem;
-  margin-bottom: 1.4rem;
+  margin: 2.4rem 0 1.4rem;
 }
 .arc-thesis em { color: var(--accent); font-style: normal; font-weight: 600; }
 
@@ -640,17 +643,7 @@ section:last-of-type { border-bottom: none; }
 .badge-new      { background: var(--green-light);  color: var(--green); border: 1px solid #a7f3d0; }
 .badge-ijcv     { background: #f5f3ff; color: #6d28d9; border: 1px solid #ddd6fe; }
 .badge-preprint { background: #f3f4f6; color: #6b7280; border: 1px solid #e5e7eb; }
-.badge-review   { background: #fff7ed; color: #c2410c; border: 1px solid #fed7aa; }
 .badge-patent   { background: #ecfeff; color: #0e7490; border: 1px solid #a5f3fc; }
-
-/* Target venue of a manuscript that is still under review — deliberately muted
-   so it never reads as an acceptance. */
-.venue-pill-muted {
-  color: var(--subtle);
-  background: var(--bg-alt);
-  border-color: var(--border);
-  font-weight: 600;
-}
 
 /* Secondary venue line: workshop versions, patents, prior appearances. */
 /* One-sentence statement of what a paper contributed. */
