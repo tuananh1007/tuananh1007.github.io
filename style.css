@@ -893,7 +893,6 @@ section:last-of-type { border-bottom: none; }
   font-size: 0.9rem;
   color: var(--muted);
   line-height: 1.7;
-  max-width: 70ch;
   margin-bottom: 1.9rem;
 }
 .agenda-intro strong { color: var(--text); font-weight: 600; }
