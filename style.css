@@ -1006,7 +1006,6 @@ section:last-of-type { border-bottom: none; }
   font-size: 0.9rem;
   color: var(--muted);
   line-height: 1.7;
-  max-width: 68ch;
   margin-bottom: 1.75rem;
 }
 .grants-intro strong { color: var(--text); font-weight: 600; }
