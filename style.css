@@ -921,6 +921,24 @@ section:last-of-type { border-bottom: none; }
 .agenda-question strong { font-style: normal; font-weight: 700; color: var(--accent); }
 
 .agenda-list { display: flex; flex-direction: column; }
+.agenda-item { cursor: pointer; }
+.agenda-item h3 { position: relative; padding-right: 1.6rem; }
+.agenda-item h3::after {
+  content: "";
+  position: absolute;
+  right: 0.2rem;
+  top: 0.45em;
+  width: 0.55em;
+  height: 0.55em;
+  border-right: 2px solid var(--subtle);
+  border-bottom: 2px solid var(--subtle);
+  transform: rotate(45deg);
+  transition: transform 0.2s;
+}
+.agenda-item.open h3::after { transform: rotate(-135deg); top: 0.7em; }
+.agenda-detail { display: none; }
+.agenda-item.open .agenda-detail { display: block; }
+.agenda-hint { font-size: 0.78rem; color: var(--subtle); margin: 0.8rem 0 0; }
 
 .agenda-item {
   display: grid;
