@@ -797,6 +797,43 @@ section:last-of-type { border-bottom: none; }
 .ug-ce  { background: linear-gradient(135deg, #fde68a, #fef3c7); color: var(--amber); }
 .ug-math { background: linear-gradient(135deg, #e9d5ff, #f3e8ff); color: #7c3aed; }
 .ug-dt  { background: linear-gradient(135deg, #fecaca, #fee2e2); color: #dc2626; }
+.ug-vnu { background: linear-gradient(135deg, #bae6fd, #e0f2fe); color: #0369a1; }
+
+.mentee-summary {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin: -0.4rem 0 0.8rem 0.75rem;
+}
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.6rem;
+  padding: 0 0.75rem;
+}
+.team-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.6rem 0.75rem;
+  background: var(--bg-alt);
+}
+.team-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 0.3rem;
+}
+.team-name { font-size: 0.82rem; font-weight: 600; color: var(--text); }
+.team-count {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--accent);
+  background: var(--accent-light);
+  border-radius: 100px;
+  padding: 0.05rem 0.5rem;
+  flex-shrink: 0;
+}
+.team-members { font-size: 0.72rem; color: var(--muted); line-height: 1.5; }
 .ug-mentee-name {
   font-size: 0.72rem;
   color: var(--muted);
